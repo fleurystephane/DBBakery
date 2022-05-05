@@ -1,0 +1,1 @@
+docker run -dit --name bakery-db_v1.0.0 -p 5432:5432 -e POSTGRES_PASSWORD=myPassword -e POSTGRES_DB=bakery bakery-db:v1.0.0

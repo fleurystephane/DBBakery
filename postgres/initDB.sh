@@ -1,0 +1,1 @@
+liquibase update --changelog-file=master.yaml --url=jdbc:postgresql://localhost:5432/postgres --username=postgres --password=myPassword

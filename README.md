@@ -22,6 +22,12 @@ On pourra stop le container si besoin (économie de ressources), les données se
 
 Utilisation de Docker Desktop pour arrêter et supprimer un container.
 
+## Chargement de la base local (Conteneurisée)
+
+```
+./postgres/initDB.sh
+```
+
 # Liquibase
 
 Pour le dév, on utilsera https://hub.liquibase.com/ avec le compte fleuryst et P..._72

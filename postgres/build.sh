@@ -1,0 +1,1 @@
+docker build -t bakery-db:v1.0.0 .
