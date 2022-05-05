@@ -1,0 +1,300 @@
+databaseChangeLog:
+    - changeSet:
+          id: 1651733669622-1
+          author: steph (generated)
+          changes:
+              - createTable:
+                    columns:
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: id_preparation
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: id_ingredient
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: quantite
+                              type: numeric(2)
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: unite
+                              type: VARCHAR
+                    tableName: preparation-ingredient
+    - changeSet:
+          id: 1651733669622-2
+          author: steph (generated)
+          changes:
+              - createTable:
+                    columns:
+                        - column:
+                              constraints:
+                                  nullable: false
+                                  primaryKey: true
+                                  primaryKeyName: unite_pk
+                              name: id
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: nom
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: qualificatif
+                              type: VARCHAR
+                    tableName: unite
+    - changeSet:
+          id: 1651733669622-3
+          author: steph (generated)
+          changes:
+              - createTable:
+                    columns:
+                        - column:
+                              constraints:
+                                  nullable: false
+                                  primaryKey: true
+                                  primaryKeyName: ingredient_pk
+                              name: id
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: nom
+                              type: VARCHAR(100)
+                        - column:
+                              name: prix
+                              type: numeric(5, 2)
+                    tableName: ingredient
+    - changeSet:
+          id: 1651733669622-4
+          author: steph (generated)
+          changes:
+              - loadData:
+                    columns:
+                        - column:
+                              header: id
+                              name: id
+                              type: STRING
+                        - column:
+                              header: nom
+                              name: nom
+                              type: STRING
+                        - column:
+                              header: prix
+                              name: prix
+                              type: NUMERIC
+                    commentLineStartsWith: "#"
+                    encoding: UTF-8
+                    file: data/ingredient.csv
+                    quotchar: '"'
+                    separator: ","
+                    tableName: ingredient
+    - changeSet:
+          id: 1651733669622-5
+          author: steph (generated)
+          changes:
+              - createTable:
+                    columns:
+                        - column:
+                              constraints:
+                                  nullable: false
+                                  primaryKey: true
+                                  primaryKeyName: preparation_pk
+                              name: id
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: nom
+                              type: VARCHAR
+                        - column:
+                              name: description
+                              remarks: description de la réalisation de cette préparation
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: quantite
+                              type: numeric(5)
+                    tableName: preparation
+    - changeSet:
+          id: 1651733669622-6
+          author: steph (generated)
+          changes:
+              - loadData:
+                    columns:
+                        - column:
+                              header: id
+                              name: id
+                              type: STRING
+                        - column:
+                              header: nom
+                              name: nom
+                              type: STRING
+                        - column:
+                              header: description
+                              name: description
+                              type: STRING
+                        - column:
+                              header: quantite
+                              name: quantite
+                              type: NUMERIC
+                    commentLineStartsWith: "#"
+                    encoding: UTF-8
+                    file: data/preparation.csv
+                    quotchar: '"'
+                    separator: ","
+                    tableName: preparation
+    - changeSet:
+          id: 1651733669622-7
+          author: steph (generated)
+          changes:
+              - createTable:
+                    columns:
+                        - column:
+                              constraints:
+                                  nullable: false
+                                  primaryKey: true
+                                  primaryKeyName: recette_pk
+                              name: id
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: titre
+                              type: VARCHAR
+                        - column:
+                              name: auteur
+                              type: VARCHAR
+                    tableName: recette
+    - changeSet:
+          id: 1651733669622-8
+          author: steph (generated)
+          changes:
+              - loadData:
+                    columns:
+                        - column:
+                              header: id
+                              name: id
+                              type: STRING
+                        - column:
+                              header: titre
+                              name: titre
+                              type: STRING
+                        - column:
+                              header: auteur
+                              name: auteur
+                              type: STRING
+                    commentLineStartsWith: "#"
+                    encoding: UTF-8
+                    file: data/recette.csv
+                    quotchar: '"'
+                    separator: ","
+                    tableName: recette
+    - changeSet:
+          id: 1651733669622-9
+          author: steph (generated)
+          changes:
+              - createTable:
+                    columns:
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: id_recette
+                              type: VARCHAR
+                        - column:
+                              constraints:
+                                  nullable: false
+                              name: id_preparation
+                              type: VARCHAR
+                    tableName: recette-preparation
+    - changeSet:
+          id: 1651733669622-10
+          author: steph (generated)
+          changes:
+              - addForeignKeyConstraint:
+                    baseColumnNames: unite
+                    baseTableName: preparation-ingredient
+                    constraintName: preparation_ingredient_fk
+                    deferrable: false
+                    initiallyDeferred: false
+                    onDelete: NO ACTION
+                    onUpdate: NO ACTION
+                    referencedColumnNames: id
+                    referencedTableName: unite
+                    validate: true
+    - changeSet:
+          id: 1651733669622-11
+          author: steph (generated)
+          changes:
+              - addForeignKeyConstraint:
+                    baseColumnNames: id_ingredient
+                    baseTableName: preparation-ingredient
+                    constraintName: preparation_ingredient_fk_1
+                    deferrable: false
+                    initiallyDeferred: false
+                    onDelete: NO ACTION
+                    onUpdate: NO ACTION
+                    referencedColumnNames: id
+                    referencedTableName: ingredient
+                    validate: true
+    - changeSet:
+          id: 1651733669622-12
+          author: steph (generated)
+          changes:
+              - addForeignKeyConstraint:
+                    baseColumnNames: id_preparation
+                    baseTableName: preparation-ingredient
+                    constraintName: preparation_ingredient_fk_2
+                    deferrable: false
+                    initiallyDeferred: false
+                    onDelete: NO ACTION
+                    onUpdate: NO ACTION
+                    referencedColumnNames: id
+                    referencedTableName: preparation
+                    validate: true
+    - changeSet:
+          id: 1651733669622-13
+          author: steph (generated)
+          changes:
+              - addUniqueConstraint:
+                    columnNames: nom
+                    constraintName: ingredient_un
+                    tableName: ingredient
+    - changeSet:
+          id: 1651733669622-14
+          author: steph (generated)
+          changes:
+              - addForeignKeyConstraint:
+                    baseColumnNames: id_preparation
+                    baseTableName: recette-preparation
+                    constraintName: recette_preparation_fk_1
+                    deferrable: false
+                    initiallyDeferred: false
+                    onDelete: NO ACTION
+                    onUpdate: NO ACTION
+                    referencedColumnNames: id
+                    referencedTableName: preparation
+                    validate: true
+    - changeSet:
+          id: 1651733669622-15
+          author: steph (generated)
+          changes:
+              - addForeignKeyConstraint:
+                    baseColumnNames: id_recette
+                    baseTableName: recette-preparation
+                    constraintName: recette_preparation_fk
+                    deferrable: false
+                    initiallyDeferred: false
+                    onDelete: NO ACTION
+                    onUpdate: NO ACTION
+                    referencedColumnNames: id
+                    referencedTableName: recette
+                    validate: true
